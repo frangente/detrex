@@ -13,12 +13,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import importlib
+from importlib import resources
 
-import os
-import pkg_resources
-from omegaconf import OmegaConf
-
+import omegaconf
 from detectron2.config import LazyConfig
+from omegaconf import OmegaConf
 
 
 def try_get_key(cfg, *keys, default=None):
@@ -33,21 +33,23 @@ def try_get_key(cfg, *keys, default=None):
     return default
 
 
-def get_config(config_path):
+def get_config(config_path: str) -> omegaconf.DictConfig:
     """
     Returns a config object from a config_path.
 
     Args:
-        config_path (str): config file name relative to detrex's "configs/"
+        config_path: config file name relative to detrex's "configs/"
             directory, e.g., "common/train.py"
 
     Returns:
-        omegaconf.DictConfig: a config object
+        The loaded config object.
     """
-    cfg_file = pkg_resources.resource_filename(
-        "detrex.config", os.path.join("configs", config_path)
-    )
-    if not os.path.exists(cfg_file):
-        raise RuntimeError("{} not available in detrex configs!".format(config_path))
-    cfg = LazyConfig.load(cfg_file)
+    module = importlib.import_module("detrex.config")
+    root = resources.files(module)
+    file = root / "configs" / config_path
+    if not file.exists():
+        msg = f"{config_path} not available in detrex configs!"
+        raise RuntimeError(msg)
+
+    cfg = LazyConfig.load(str(file))
     return cfg
