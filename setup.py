@@ -1,9 +1,29 @@
-# Copyright 2024 Francesco Gentile.
-# SPDX-License-Identifier: Apache-2.0
+# coding=utf-8
+# Copyright 2022 The IDEA Authors. All rights reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+# ------------------------------------------------------------------------------------------------
+# Modified from
+# https://github.com/fundamentalvision/Deformable-DETR/blob/main/models/ops/setup.py
+# https://github.com/facebookresearch/detectron2/blob/main/setup.py
+# https://github.com/open-mmlab/mmdetection/blob/master/setup.py
+# https://github.com/Oneflow-Inc/libai/blob/main/setup.py
+# ------------------------------------------------------------------------------------------------
 
 import os
 import shutil
 from pathlib import Path
+from typing import List
 
 import torch
 from setuptools import Extension, find_packages, setup
@@ -11,7 +31,7 @@ from torch.utils import cpp_extension
 from torch.utils.cpp_extension import CUDA_HOME, CppExtension, CUDAExtension
 
 
-def get_extensions() -> list[Extension]:
+def get_extensions() -> List[Extension]:
     root_dir = Path(__file__).parent
     extensions_dir = root_dir / "detrex" / "layers" / "csrc"
 
@@ -56,7 +76,7 @@ def get_extensions() -> list[Extension]:
     return ext_modules
 
 
-def get_detrex_configs() -> list[str]:
+def get_detrex_configs() -> List[str]:
     """Returns a list of configs to include in package for model zoo."""
     root_dir = Path(__file__).parent
     source_configs_dir = root_dir / "configs"
