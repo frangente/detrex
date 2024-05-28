@@ -1,0 +1,33 @@
+[project]
+name = "detrex"
+version = "0.5.0"
+description = "IDEA open source toolbox for transformer-based instance recognition tasks"
+authors = [
+    {name = "International Digital Economy Academy"},
+]
+dependencies = [
+    "torch>=1.10",
+    "torchvision>=0.11",
+    "detectron2 @ git+https://github.com/facebookresearch/detectron2",
+    "wandb",
+    "scipy",
+    "timm",
+    "einops",
+    "opencv-python",
+    "fairscale",
+    "omegaconf"
+]
+requires-python = ">=3.8"
+readme = "README.md"
+license = {file = "LICENSE"}
+
+[project.optional-dependencies]
+tools = [
+    "psutil",
+    "submitit",
+    "hydra-core",
+]
+
+[build-system]
+requires = ["setuptools>=61", "torch>=1.10"]
+build-backend = "setuptools.build_meta"

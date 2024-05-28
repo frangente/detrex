@@ -13,8 +13,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from detrex import layers
-from detrex import modeling
-from detrex import utils
-from detrex import data
-from detrex import config
+from detrex import config, data, layers, modeling, utils
+
+from ._version import __version__
+
+__all__ = [
+    "layers",
+    "modeling",
+    "utils",
+    "data",
+    "config",
+    "__version__",
+]
