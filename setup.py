@@ -26,7 +26,7 @@ from pathlib import Path
 from typing import List
 
 import torch
-from setuptools import Extension, find_packages, setup
+from setuptools import Extension, setup
 from torch.utils import cpp_extension
 from torch.utils.cpp_extension import CUDA_HOME, CppExtension, CUDAExtension
 
@@ -140,7 +140,6 @@ if __name__ == "__main__":
     write_version()
 
     setup(
-        packages=find_packages(exclude=("configs", "tests")),
         ext_modules=get_extensions(),
         cmdclass={"build_ext": cpp_extension.BuildExtension},
         package_data={"detrex.config": get_detrex_configs()},

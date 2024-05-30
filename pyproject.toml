@@ -6,8 +6,6 @@ authors = [
     {name = "International Digital Economy Academy"},
 ]
 dependencies = [
-    "torch>=1.10",
-    "torchvision>=0.11",
     "detectron2 @ git+https://github.com/facebookresearch/detectron2",
     "wandb",
     "scipy",
@@ -15,7 +13,7 @@ dependencies = [
     "einops",
     "opencv-python",
     "fairscale",
-    "omegaconf"
+    "omegaconf",
 ]
 requires-python = ">=3.8"
 readme = "README.md"
@@ -29,5 +27,9 @@ tools = [
 ]
 
 [build-system]
-requires = ["setuptools>=61", "torch>=1.10"]
+requires = ["setuptools>=61", "wheel", "torch>=1.10"]
 build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["detrex*", "tools*", "projects*"]
+namespaces = true
